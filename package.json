@@ -11,6 +11,7 @@
   "test": "mocha \"test/**/*.test.js\" --timeout 10000",
   "test-external": "mocha \"test/external/**/*.test.js\" --timeout 10000",
   "test-controller": "mocha \"test/controller/**/*.test.js\" --timeout 10000",
+  "test-controller-sucesso": "mocha \"test/controller/transferControllerSucesso.test.js\" --timeout 10000",
   "start": "node server.js"
 }
 }
