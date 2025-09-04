@@ -1,4 +1,5 @@
 const userService = require('../service/userService');
+const { generateToken } = require('../service/authService');
 
 exports.register = (req, res) => {
   try {
@@ -12,7 +13,8 @@ exports.register = (req, res) => {
 exports.login = (req, res) => {
   try {
     const user = userService.loginUser(req.body);
-    res.status(200).json(user);
+    const token = generateToken(user);
+    res.status(200).json({ user, token });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
