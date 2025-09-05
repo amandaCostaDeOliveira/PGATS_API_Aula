@@ -1,7 +1,9 @@
 {
   "dependencies": {
+    "apollo-server-express": "^3.13.0",
     "chai": "^6.0.1",
-    "express": "^5.1.0",
+    "express": "^4.21.2",
+    "graphql": "^16.11.0",
     "jsonwebtoken": "^9.0.2",
     "mocha": "^11.7.1",
     "sinon": "^21.0.0",
@@ -13,7 +15,8 @@
     "test-external": "mocha \"test/external/**/*.test.js\" --timeout 10000 --reporter mochawesome",
     "test-controller": "mocha \"test/controller/**/*.test.js\" --timeout 10000 --reporter mochawesome",
     "test-controller-sucesso": "mocha \"test/controller/transferControllerSucesso.test.js\" --timeout 10000 --reporter mochawesome",
-    "start": "node server.js"
+    "start": "node server.js",
+    "start-graphql": "node graphql/server.js"
   },
   "devDependencies": {
     "mochawesome": "^7.1.3"
