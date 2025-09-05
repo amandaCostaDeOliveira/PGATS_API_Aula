@@ -12,9 +12,9 @@
   },
   "scripts": {
     "test": "mocha \"test/**/*.test.js\" --timeout 10000 --reporter mochawesome",
-  "test-external": "mocha \"test/external/**/*.test.js\" --timeout 10000 --reporter mochawesome",
-  "test-external-external": "mocha \"test/external/transferExternal.test.js\" --timeout 10000 --reporter mochawesome",
-  "test-external-graphql": "mocha \"test/external/transferGraphql.test.js\" --timeout 10000 --reporter mochawesome",
+    "test-external": "mocha \"test/external/**/*.test.js\" --timeout 10000 --reporter mochawesome",
+    "test-external-external": "mocha \"test/external/transferExternal.test.js\" --timeout 10000 --reporter mochawesome",
+    "test-external-graphql": "mocha \"test/external/transferGraphql.test.js\" --timeout 10000 --reporter mochawesome",
     "test-controller": "mocha \"test/controller/**/*.test.js\" --timeout 10000 --reporter mochawesome",
     "test-controller-sucesso": "mocha \"test/controller/transferControllerSucesso.test.js\" --timeout 10000 --reporter mochawesome",
     "start": "node server.js",
