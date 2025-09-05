@@ -19,14 +19,22 @@ const resolvers = {
     transfer: (parent, { remetente, destinatario, valor }, context) => {
       const authHeader = context.req.headers['authorization'];
       if (!authHeader) throw new Error('Token não informado');
+
       const token = authHeader.split(' ')[1];
       if (!token) throw new Error('Token mal formatado');
+
       try {
         verifyToken(token);
       } catch (err) {
         throw new Error('Token inválido ou expirado');
       }
-      return transferService.transfer({ remetente, destinatario, valor });
+
+      // ✅ Agora captura qualquer erro lançado no service e repassa pro GraphQL
+      try {
+        return transferService.transfer({ remetente, destinatario, valor });
+      } catch (err) {
+        throw new Error(err.message);
+      }
     },
   },
 };
