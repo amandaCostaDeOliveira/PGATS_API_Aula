@@ -13,15 +13,18 @@ const transferService = require('../../service/transferService');
 
 //testes
 describe('Transfer Controller', () => {
-  afterEach(() => {
+  
+    beforeEach(() => {
+    // mock do jwt para aceitar o token
+    sinon.stub(jwt, 'verify').returns({ id: 1, username: 'Amanda' });
+    })
+
+    afterEach(() => {
     sinon.restore(); // garante limpeza dos stubs após cada teste
   });
 
   describe('POST /transfer', () => {
     it('Quando informo remetente e destinatário inexistentes, o retorno será 400', async () => {
-      // mock do jwt para aceitar o token
-      sinon.stub(jwt, 'verify').returns({ id: 1, username: 'Amanda' });
-
       const resposta = await request(app)
         .post('/transfer')
         .set('Authorization', 'Bearer fakeToken123')
@@ -36,8 +39,6 @@ describe('Transfer Controller', () => {
     });
 
     it('Usando Mocks: Quando informo remetente e destinatário inexistentes, o retorno será 400', async () => {
-      // mock do jwt para aceitar o token
-      sinon.stub(jwt, 'verify').returns({ id: 1, username: 'Amanda' });
 
       // mock do service
       sinon.stub(transferService, 'transfer').throws(new Error('Usuário não encontrado'));
@@ -56,8 +57,6 @@ describe('Transfer Controller', () => {
     });
 
     it('Usando Mocks: Quando informo valores válidos e tenho sucesso 201 Created na transferência', async () => {
-      // mock do jwt para aceitar o token
-      sinon.stub(jwt, 'verify').returns({ id: 1, username: 'Amanda' });
 
       // mock do service
       sinon.stub(transferService, 'transfer').returns({
