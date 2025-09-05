@@ -18,13 +18,18 @@ jobs:
           node-version: '20'
       - name: Instalar dependências
         run: npm install
-      - name: Executar testes
+      - name: Executar testes de controller
         run: npm run test-controller
-      - name: Subir a API
-        run: npm start & 
-      - name: Esperar a API estar funcionando
+      - name: Subir a API REST
+        run: npm start &
+      - name: Esperar a API REST estar funcionando
         run: sleep 5
-      - name: Rodar os testes de API via HTTP
-        run: npm run test-external
-
+      - name: Rodar os testes REST externos
+        run: npm run test-external-external
+      - name: Subir a API GraphQL
+        run: npm run start-graphql &
+      - name: Esperar a API GraphQL estar funcionando
+        run: sleep 5
+      - name: Rodar os testes GraphQL
+        run: npm run test-external-graphql
 
