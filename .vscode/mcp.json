@@ -1,0 +1,17 @@
+{
+  "servers": {
+    "github-mcp-server": {
+        "url": "https://api.githubcopilot.com/mcp/",
+        "type": "http"
+    },
+    "atlassian-mcp-server": {
+      "url": "https://mcp.atlassian.com/v1/sse",
+      "type": "http"
+    },
+    "my-mcp-server-43a3877a": {
+		"url": "https://mcp.zapier.com/api/mcp/s/OWVhODE0ZTEtZjNhMC00ZjUyLTkwYTQtN2E2NjNhMDNhNWY2OjU2OWE2YmRlLTQ1MzYtNDZlZC1hNTQ3LTQ0N2E0NmM0N2Y4NA==/mcp",
+		"type": "http"
+		}
+  },
+  "inputs": []
+}
