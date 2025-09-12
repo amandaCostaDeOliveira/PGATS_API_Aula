@@ -29,8 +29,8 @@ describe('Transfer Controller', () => {
         .post('/transfer')
         .set('Authorization', 'Bearer fakeToken123')
         .send({
-          "remetente": "Amanda",
-          "destinatario": "Julio",
+          "remetente": "Desconhecido",
+          "destinatario": "Inexistente",
           "valor": 100
         });
       
