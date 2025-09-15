@@ -8,8 +8,9 @@ const users = [
   {
     username: 'Julio', 
     password: '123456', 
-    favorecidos: ['Amanda']
+    favorecidos: ['']
   }
+  
 ];
 
 module.exports = {
