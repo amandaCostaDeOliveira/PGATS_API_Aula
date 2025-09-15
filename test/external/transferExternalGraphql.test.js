@@ -45,7 +45,7 @@ describe ('Teste de Transferência', () => {
 
     });
 
-    it.only('Validar que é não é possível transferir mais de 5k para um contato não favorecido', async () => {
+    it('Validar que é não é possível transferir mais de 5k para um contato não favorecido', async () => {
         const resposta = await request ('http://localhost:4000/graphql')
             .post('')
             .send({
