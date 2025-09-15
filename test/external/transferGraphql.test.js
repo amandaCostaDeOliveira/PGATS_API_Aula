@@ -7,42 +7,11 @@ describe('GraphQL Mutation: transfer', () => {
   let token;
 
   before(async () => {
-    // Cria Amanda com saldo inicial de 100000 para testes
-    const registerAmanda = `
-      mutation {
-        register(username: "Amanda", password: "123456", saldo: 100000, favorecidos: ["Julio"]) {
-          username
-          saldo
-        }
-      }
-    `;
-    await request(graphqlUrl).post('').send({ query: registerAmanda });
-
-    // Cria Julio como destinatário
-    const registerJulio = `
-      mutation {
-        register(username: "Julio", password: "123456") {
-          username
-        }
-      }
-    `;
-    await request(graphqlUrl).post('').send({ query: registerJulio });
-
-    // Cria Carlos como destinatário que não é favorecido
-    const registerCarlos = `
-      mutation {
-        register(username: "Carlos", password: "123456") {
-          username
-        }
-      }
-    `;
-    await request(graphqlUrl).post('').send({ query: registerCarlos });
-
-    // Login para obter token da Amanda
+    // Login para obter token do Julio
     const loginMutation = {
       query: `
         mutation {
-          login(username: "Amanda", password: "123456") {
+          login(username: "Julio", password: "123456") {
             token
           }
         }
@@ -57,7 +26,7 @@ describe('GraphQL Mutation: transfer', () => {
     const transferMutation = {
       query: `
         mutation {
-          transfer(remetente: "Amanda", destinatario: "Julio", valor: 50) {
+          transfer(remetente: "Julio", destinatario: "Amanda", valor: 50) {
             remetente
             destinatario
             valor
@@ -74,8 +43,8 @@ describe('GraphQL Mutation: transfer', () => {
     expect(res.status).to.equal(200);
     expect(res.body).to.not.have.property('errors');
     expect(res.body.data.transfer).to.include({
-      remetente: 'Amanda',
-      destinatario: 'Julio',
+      remetente: 'Julio',
+      destinatario: 'Amanda',
       valor: 50
     });
     expect(res.body.data.transfer.data).to.be.a('string');
@@ -85,7 +54,7 @@ describe('GraphQL Mutation: transfer', () => {
     const transferMutation = {
       query: `
         mutation {
-          transfer(remetente: "Amanda", destinatario: "Carlos", valor: 6000) {
+          transfer(remetente: "Julio", destinatario: "Amanda", valor: 5001) {
             remetente
             destinatario
             valor
@@ -99,8 +68,6 @@ describe('GraphQL Mutation: transfer', () => {
       .set('Authorization', `Bearer ${token}`)
       .send(transferMutation);
 
-    console.log('Resposta tentativa para não favorecido:', JSON.stringify(res.body, null, 2));
-
     expect(res.status).to.equal(200);
     expect(res.body.errors).to.be.an('array');
     expect(res.body.errors[0].message).to.match(/favorecido/i);
@@ -110,7 +77,7 @@ describe('GraphQL Mutation: transfer', () => {
     const transferMutation = {
       query: `
         mutation {
-          transfer(remetente: "Amanda", destinatario: "Julio", valor: 100) {
+          transfer(remetente: "Julio", destinatario: "Amanda", valor: 100) {
             remetente
             destinatario
             valor
