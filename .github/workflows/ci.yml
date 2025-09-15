@@ -24,12 +24,10 @@ jobs:
         run: npm start &
       - name: Esperar a API REST estar funcionando
         run: sleep 5
-      - name: Rodar os testes REST externos
-        run: npm run test-external-external
       - name: Subir a API GraphQL
         run: npm run start-graphql &
       - name: Esperar a API GraphQL estar funcionando
         run: sleep 5
-      - name: Rodar os testes GraphQL
-        run: npm run test-external-graphql
+      - name: Rodar os testes externos (Rest + GraphQL)
+        run: npm run test-external
 
