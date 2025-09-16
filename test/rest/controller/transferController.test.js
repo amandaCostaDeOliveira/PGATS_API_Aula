@@ -5,10 +5,10 @@ const { expect } = require('chai');
 const jwt = require('jsonwebtoken'); // 👈 adicionado
 
 //aplicação
-const app = require ('../../app');
+const app = require ('../../../app');
 
 //Mock
-const transferService = require('../../service/transferService');
+const transferService = require('../../../service/transferService');
 
 
 //testes
