@@ -2,26 +2,20 @@ const request = require('supertest');
 const { expect } = require('chai');
 
 describe ('Teste de Transferência', () => {
-    it('Validar que é possível transferir grana entre duas contas', async () => {
+
+    before(async () => {
+        const loginUser = require('../fixture/requisicoes/login/loginUser.json')
         const resposta = await request ('http://localhost:4000/graphql')
             .post('')
-            .send({
-                query: `
-                    mutation Login($username: String!, $password: String!) { 
-                        login(username: $username, password: $password) { 
-                            token
-                        }   
-                    }`,
-                variables: {
-                    username: 'Julio',
-                    password: '123456'
-                }
-            })
+            .send(loginUser)
         //console.log(resposta.body.data.login.token)
+        token = resposta.body.data.login.token
+    })
 
+    it('Validar que é possível transferir grana entre duas contas', async () => {
         const respostaTransferencia = await request('http://localhost:4000/graphql')
         .post('')
-        .set('Authorization', `Bearer ${resposta.body.data.login.token}`)
+        .set('Authorization', `Bearer ${token}`)
         .send({
             query: `
                 mutation Mutation($remetente: String!, $destinatario: String!, $valor: Float!) {
@@ -40,31 +34,13 @@ describe ('Teste de Transferência', () => {
 
             }
         })
-
         expect(respostaTransferencia.status).to.equal(200);    
-
     });
 
     it('Validar que é não é possível transferir mais de 5k para um contato não favorecido', async () => {
-        const resposta = await request ('http://localhost:4000/graphql')
-            .post('')
-            .send({
-                query: `
-                    mutation Login($username: String!, $password: String!) { 
-                        login(username: $username, password: $password) { 
-                            token
-                        }   
-                    }`,
-                variables: {
-                    username: 'Julio',
-                    password: '123456'
-                }
-            })
-        //console.log(resposta.body.data.login.token)
-
         const respostaTransferencia = await request('http://localhost:4000/graphql')
         .post('')
-        .set('Authorization', `Bearer ${resposta.body.data.login.token}`)
+        .set('Authorization', `Bearer ${token}`)
         .send({
             query: `
                 mutation Mutation($remetente: String!, $destinatario: String!, $valor: Float!) {
@@ -80,10 +56,8 @@ describe ('Teste de Transferência', () => {
                 remetente: 'Julio',
                 destinatario: 'Amanda',
                 valor: 5001
-
             }
         })
-
         expect(respostaTransferencia.status).to.equal(200);
         expect(respostaTransferencia.body.errors[0].message).to.equal('Transferências acima de R$ 5.000,00 só para favorecidos');    
     });
