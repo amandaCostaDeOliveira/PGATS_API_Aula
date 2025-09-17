@@ -1,5 +1,9 @@
 const request = require('supertest');
-const { expect } = require('chai');
+const chai = require('chai');
+const chaiExclude = require('chai-exclude');
+
+chai.use(chaiExclude);
+const { expect } = chai;
 
 describe ('Teste de Transferência', () => {
 
@@ -24,7 +28,8 @@ describe ('Teste de Transferência', () => {
         .send(createTransfer)
 
         expect(respostaTransferencia.status).to.equal(200);
-        expect(respostaTransferencia.body).to.eql(respostaEsperada)    
+        //expect(respostaTransferencia.body).to.eql(respostaEsperada)        #não funciona devido o campo data
+        expect(respostaTransferencia.body.data.transfer).excluding('data').to.deep.equal(respostaEsperada.data.transfer);    
     });
 
     it('Validar que é não é possível transferir mais de 5k para um contato não favorecido', async () => {
