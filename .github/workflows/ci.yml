@@ -12,26 +12,33 @@ jobs:
     steps:
       - name: Checkout código
         uses: actions/checkout@v3
+
       - name: Instalar Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
+
       - name: Instalar dependências
         run: npm install
+
       - name: Executar testes de controller da API Rest
         run: npm run test-rest-controller
+
       # - name: Executar testes de controller da API GraphQL
       #   run: npm run test-graphql-controller     
+
       - name: Subir a API REST
         run: npm run start-rest &
-      - name: Esperar a API REST estar funcionando
-        run: sleep 5
-      - name: Rodar os testes externos da API Rest
-        run: npm run test-rest-external
+
       - name: Subir a API GraphQL
         run: npm run start-graphql &
-      - name: Esperar a API GraphQL estar funcionando
-        run: sleep 5
-      - name: Rodar os testes externos da API GraphQL
+
+      - name: Esperar as APIs estarem funcionando
+        run: sleep 8
+
+      - name: Rodar os testes externos da API Rest via HTTP
+        run: npm run test-rest-external
+
+      - name: Rodar os testes externos da API GraphQL via HTTP
         run: npm run test-graphql-external
 
