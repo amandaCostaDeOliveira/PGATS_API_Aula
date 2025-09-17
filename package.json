@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "apollo-server-express": "^3.13.0",
-    "chai": "^6.0.1",
     "express": "^4.21.2",
     "graphql": "^16.11.0",
     "jsonwebtoken": "^9.0.2",
@@ -10,24 +9,22 @@
     "supertest": "^7.1.4",
     "swagger-ui-express": "^5.0.1"
   },
-"scripts": {
+  "scripts": {
     "test": "mocha \"test/**/*.test.js\" --timeout 10000 --reporter mochawesome",
-       
     "test-rest-external": "mocha \"test/rest/external/**/*.test.js\" --timeout 10000 --reporter mochawesome",
     "test-rest-controller": "mocha \"test/rest/controller/**/*.js\" --timeout 10000 --reporter mochawesome",
     "test-rest-controller-transferController": "mocha \"test/rest/controller/transferController.test.js\" --timeout 10000 --reporter mochawesome",
     "test-rest-controller-transferControllerSucesso": "mocha \"test/rest/controller/transferControllerSucesso.test.js\" --timeout 10000 --reporter mochawesome",
-    
     "test-graphql-external": "mocha \"test/graphql/external/**/*.test.js\" --timeout 10000 --reporter mochawesome",
     "test-graphql-external-aula": "mocha \"test/graphql/external/transferExternalAula.test.js\" --timeout 10000 --reporter mochawesome",
-    "test-graphql-external-trabalhoextra": "mocha \"test/graphql/external/transferExternalTrabalhoExtra.test.js\" --timeout 10000 --reporter mochawesome", 
+    "test-graphql-external-trabalhoextra": "mocha \"test/graphql/external/transferExternalTrabalhoExtra.test.js\" --timeout 10000 --reporter mochawesome",
     "test-graphql-controller": "mocha \"test/graphql/controller/**/*.js\" --timeout 10000 --reporter mochawesome",
-    
     "start-rest": "node server.js",
     "start-graphql": "node graphql/server.js"
   },
-
   "devDependencies": {
+    "chai": "^4.3.10",
+    "chai-exclude": "^2.1.1",
     "mochawesome": "^7.1.3"
   }
 }
