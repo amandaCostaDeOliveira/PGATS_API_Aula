@@ -12,52 +12,28 @@ describe ('Teste de Transferência', () => {
         token = resposta.body.data.login.token
     })
 
+    beforeEach(() => {
+        createTransfer = require('../fixture/requisicoes/transferencia/createTransfer.json')
+    })
+
     it('Validar que é possível transferir grana entre duas contas', async () => {
+        const respostaEsperada = require('../fixture/respostas/transferencia/validarqueepossiveltransferirgranaentreduascontas.json')
         const respostaTransferencia = await request('http://localhost:4000/graphql')
         .post('')
         .set('Authorization', `Bearer ${token}`)
-        .send({
-            query: `
-                mutation Mutation($remetente: String!, $destinatario: String!, $valor: Float!) {
-                    transfer(remetente: $remetente, destinatario: $destinatario, valor: $valor) {
-                        remetente
-                        destinatario
-                        valor
-                        data
-                    }
-                }
-            `,
-            variables: {
-                remetente: 'Amanda',
-                destinatario: 'Julio',
-                valor: 10
+        .send(createTransfer)
 
-            }
-        })
-        expect(respostaTransferencia.status).to.equal(200);    
+        expect(respostaTransferencia.status).to.equal(200);
+        expect(respostaTransferencia.body).to.eql(respostaEsperada)    
     });
 
     it('Validar que é não é possível transferir mais de 5k para um contato não favorecido', async () => {
+        createTransfer.variables.valor = 5001;
         const respostaTransferencia = await request('http://localhost:4000/graphql')
         .post('')
         .set('Authorization', `Bearer ${token}`)
-        .send({
-            query: `
-                mutation Mutation($remetente: String!, $destinatario: String!, $valor: Float!) {
-                    transfer(remetente: $remetente, destinatario: $destinatario, valor: $valor) {
-                        remetente
-                        destinatario
-                        valor
-                        data
-                    }
-                }
-            `,
-            variables: {
-                remetente: 'Julio',
-                destinatario: 'Amanda',
-                valor: 5001
-            }
-        })
+        .send(createTransfer)
+
         expect(respostaTransferencia.status).to.equal(200);
         expect(respostaTransferencia.body.errors[0].message).to.equal('Transferências acima de R$ 5.000,00 só para favorecidos');    
     });
