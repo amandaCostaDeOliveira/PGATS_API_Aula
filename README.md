@@ -16,6 +16,8 @@ Esta API permite registrar usuários, realizar login, consultar usuários e efet
 
 ## Execução
 
+Antes de seguir, crie um arquivo .env na raiz do projeto contendo as propriedades BASE_URL_REST e BASE_URL_GRAPHQL com a URL destes serviços.
+
 ### API REST
 ```powershell
 node server.js

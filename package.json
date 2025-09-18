@@ -25,6 +25,7 @@
   "devDependencies": {
     "chai": "^4.3.10",
     "chai-exclude": "^2.1.1",
+    "dotenv": "^17.2.2",
     "mochawesome": "^7.1.3"
   }
 }

@@ -1,7 +1,8 @@
 const request = require('supertest');
 const { expect } = require('chai');
 
-const graphqlUrl = 'http://localhost:4000/graphql';
+require('dotenv').config();
+const graphqlUrl = process.env.BASE_URL_GRAPHQL
 
 describe('GraphQL Mutation: transfer', () => {
   let token;
