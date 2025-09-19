@@ -24,7 +24,7 @@ describe('Transfer Controller', () => {
   });
 
   describe('POST /transfer', () => {
-    it('Quando informo remetente e destinatário inexistentes, o retorno será 400', async () => {
+    it('Sem Mocks: Quando informo remetente e destinatário inexistentes, o retorno será 400', async () => {
       const resposta = await request(app)
         .post('/transfer')
         .set('Authorization', 'Bearer fakeToken123')
