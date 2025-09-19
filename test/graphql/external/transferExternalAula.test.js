@@ -7,7 +7,7 @@ const { expect } = chai;
 
 require('dotenv').config();
 
-describe ('Teste de Transferência', () => {
+describe ('Teste de Transferência feito em aula', () => {
 
     before(async () => {
         const loginUser = require('../fixture/requisicoes/login/loginUser.json')

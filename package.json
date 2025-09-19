@@ -18,6 +18,7 @@
     "test-graphql-external": "mocha \"test/graphql/external/**/*.test.js\" --timeout 10000 --reporter mochawesome",
     "test-graphql-external-aula": "mocha \"test/graphql/external/transferExternalAula.test.js\" --timeout 10000 --reporter mochawesome",
     "test-graphql-external-trabalhoextra": "mocha \"test/graphql/external/transferExternalTrabalhoExtra.test.js\" --timeout 10000 --reporter mochawesome",
+    "test-graphql-external-errors": "mocha \"test/graphql/external/transferExternalErrors.test.js\" --timeout 10000 --reporter mochawesome",
     "test-graphql-controller": "mocha \"test/graphql/controller/**/*.js\" --timeout 10000 --reporter mochawesome",
     "start-rest": "node server.js",
     "start-graphql": "node graphql/server.js"

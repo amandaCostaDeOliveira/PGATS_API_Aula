@@ -4,7 +4,7 @@ const { expect } = require('chai');
 require('dotenv').config();
 const graphqlUrl = process.env.BASE_URL_GRAPHQL
 
-describe('GraphQL Mutation: transfer', () => {
+describe('Testes para segundo trabalho extra', () => {
   let token;
 
   before(async () => {
