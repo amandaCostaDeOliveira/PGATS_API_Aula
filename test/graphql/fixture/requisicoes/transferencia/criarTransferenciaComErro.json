@@ -1,0 +1,38 @@
+[
+    {
+        "nomeDoTeste": "Acima de 5k para não favorecidos",
+        "createTransfer": {
+            "query": "mutation Mutation($remetente: String!, $destinatario: String!, $valor: Float!) {transfer(remetente: $remetente, destinatario: $destinatario, valor: $valor) {remetente destinatario valor data }}",
+            "variables": {
+                "remetente": "Julio",
+                "destinatario": "Amanda",
+                "valor": 5001
+            }
+        },
+        "mensagemEsperada": "Transferências acima de R$ 5.000,00 só para favorecidos"
+    },
+    {
+        "nomeDoTeste": "Remetente não cadastrado",
+        "createTransfer": {
+            "query": "mutation Mutation($remetente: String!, $destinatario: String!, $valor: Float!) {transfer(remetente: $remetente, destinatario: $destinatario, valor: $valor) {remetente destinatario valor data }}",
+            "variables": {
+                "remetente": "Não Cadastrado",
+                "destinatario": "Amanda",
+                "valor": 10
+            }
+        },
+        "mensagemEsperada": "Usuário não encontrado"
+    },
+    {
+        "nomeDoTeste": "Destinatário não cadastrado",
+        "createTransfer": {
+            "query": "mutation Mutation($remetente: String!, $destinatario: String!, $valor: Float!) {transfer(remetente: $remetente, destinatario: $destinatario, valor: $valor) {remetente destinatario valor data }}",
+            "variables": {
+                "remetente": "Julio",
+                "destinatario": "Não Cadastrado",
+                "valor": 10
+            }
+        },
+        "mensagemEsperada": "Usuário não encontrado"
+    }
+]
